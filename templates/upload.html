@@ -7,16 +7,19 @@
 <html>
 	<body>
 		<main>
-			<!-- a bootstrap navbar titled "Welcome to Prescread" in the centre without navbar toggle button and other navitems -->
-			<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #0496fe;">
+			<nav class="navbar navbar-dark bg-primary shadow-sm fixed-top">
 				<div class="container-fluid">
-					<!--Display the title "Prescread" in the centre of the navbar-->
-					<h1 class="navbar-brand" style="text-align: center;">Prescread</h1>
+					<a class="navbar-brand" href="#">
+						Prescread : Prescription Reader
+					</a>
+					<button class="navbar-toggler" type="button">
+      					<span class="navbar-toggler-icon"></span>
+    				</button>
 				</div>
 			</nav>
 			<!-- a bootstrap container with a form to upload a file and displays an image replacing the form after uploading -->
 			<div class="container">
-				<div class="row justify-content-center align-items-center my-5">
+				<div class="row align-items-center my-5">
 					<div class="col-md-6 text-center col-sm-12 mx-auto">
 						{% if filename %}
 							<img src="{{ url_for('display_image', filename=filename) }}" alt="Uploaded Image" width=400 height=400/>
@@ -34,12 +37,12 @@
 					</div>
 					<!--display contents in the output as a styled list-->
 					{% if filename %}
-						<div class="col-md-6 text-center col-sm-12 mx-auto">
+						<div class="col-md-6 text-center col-12 mx-auto">
 							<h2 style="font-size: 20px; text-align: center;" class="my-3">Output</h2>
 							{% with messages = get_flashed_messages() %}
 							{% if messages %}
 							{% for message in messages %}
-								<div class="alert" role="alert">
+								<div class="alert alert-info" role="alert">
 									{{ message }}
 								</div>
 							{% endfor %}
@@ -47,7 +50,7 @@
 							{% endwith %}
 							<ul class="list-group my-3">
 								{% for item in output %}
-									<li class="list-group-item">{{ item }}</li>
+									<li class="list-group-item border-info">{{ item }}</li>
 								{% endfor %}
 							</ul>
 						</div>
@@ -55,7 +58,7 @@
 				</div>
 				<!-- a row with a button and message to submit a new image -->
 				<div class="row justify-content-center align-items-center my-5">
-					<div class="col-md-6 text-center col-sm-12 mx-auto">
+					<div class="col-md-6 text-center col-12 mx-auto">
 						{% if filename %}
 							<div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
 								<a href="/" class="btn btn-primary btn-lg px-4 gap-3">Submit a new image</a>
@@ -64,6 +67,23 @@
 						{% endif %}
 					</div>
 				</div>
+			</div>
+			<!-- Show bootstrap toast for messages -->
+			<div class="toast-container position-fixed p-3 bottom-0 end-0">
+				{% with messages = get_flashed_messages() %}
+				{% if messages %}
+				{% for message in messages %}
+					<div class="toast align-items-center text-bg-info border-0 bg-info" role="alert" aria-live="assertive" aria-atomic="true">
+						<div class="d-flex">
+							<div class="toast-body">
+								{{ message }}
+							</div>
+							<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+						</div>
+					</div>
+				{% endfor %}
+				{% endif %}
+				{% endwith %}
 			</div>
 		</main>      
    </body>
