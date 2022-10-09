@@ -19,7 +19,7 @@
 			</nav>
 			<!-- a bootstrap container with a form to upload a file and displays an image replacing the form after uploading -->
 			<div class="container">
-				<div class="row align-items-center my-8">
+				<div class="row align-items-center mt-10">
 					<div class="col-md-6 text-center col-12 mx-auto">
 						{% if filename %}
 							<img src="{{ url_for('display_image', filename=filename) }}" alt="Uploaded Image" width=400 height=400/>
