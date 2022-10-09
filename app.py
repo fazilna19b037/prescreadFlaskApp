@@ -56,7 +56,8 @@ def upload_image():
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         #print('upload_image filename: ' + filename)
-        flash("Results can be found below:-")
+        flash("Results processed successfully") 
+        #output,ocr_text=master("./static/uploads/"+filename)
         output=master("./static/uploads/"+filename)
         return render_template('upload.html', filename=filename,output=output)
     else:
