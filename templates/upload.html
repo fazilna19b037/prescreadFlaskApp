@@ -8,22 +8,23 @@
 	<body>
 		<main>
 			<!-- a bootstrap navbar titled "Welcome to Prescread" in the centre without navbar toggle button and other navitems -->
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #0496fe;">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="#">Prescread</a>
+					<!--Display the title "Prescread" in the centre of the navbar-->
+					<h1 class="navbar-brand" style="text-align: center;">Prescread</h1>
 				</div>
 			</nav>
 			<!-- a bootstrap container with a form to upload a file and displays an image replacing the form after uploading -->
 			<div class="container">
-				<div class="row">
-					<div class="col-md-6 mx-auto text-center">
+				<div class="row justify-content-center align-items-center my-5">
+					<div class="col-md-6 text-center col-sm-12 mx-auto">
 						{% if filename %}
 							<img src="{{ url_for('display_image', filename=filename) }}" alt="Uploaded Image" width=400 height=400/>
 						{% else %}
 							<form method="post" action="/" enctype="multipart/form-data">
 								<div class="mb-3">
-									<label for="formFile" class="form-label">Upload a prescription</label>
-									<input class="form-control" type="file" id="formFile" name="file" autocomplete="off" required>
+									<label for="formFile" class="form-label" style="font-size: 20px;">Upload a prescription image</label>
+									<input class="form-control" type="file" id="formFile" name="file" autocomplete="off" required />
 								</div>
 								<div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
 									<button type="submit" value="submit" class="btn btn-primary btn-lg px-4 gap-3">Submit</button>
@@ -31,28 +32,37 @@
 							</form>
 						{% endif %}
 					</div>
-					<div class="col-md-6 mx-auto text-center">
-						<!--display contents in the output as a styled list-->
-						{% if filename %}
-							<ul class="list-group">
+					<!--display contents in the output as a styled list-->
+					{% if filename %}
+						<div class="col-md-6 text-center col-sm-12 mx-auto">
+							<h2 style="font-size: 20px; text-align: center;" class="my-3">Output</h2>
+							{% with messages = get_flashed_messages() %}
+							{% if messages %}
+							{% for message in messages %}
+								<div class="alert" role="alert">
+									{{ message }}
+								</div>
+							{% endfor %}
+							{% endif %}
+							{% endwith %}
+							<ul class="list-group my-3">
 								{% for item in output %}
 									<li class="list-group-item">{{ item }}</li>
 								{% endfor %}
 							</ul>
-						{% endif %}
-
-						<!-- a bootstrap alert to display the flash messages -->
-						{% with messages = get_flashed_messages() %}
-						{% if messages %}
-						{% for message in messages %}
-						<div class="alert alert-success alert-dismissible fade show" role="alert">
-							{{ message }}
-							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 						</div>
-						{% endfor %}
+					{% endif %}
+				</div>
+				<!-- a row with a button and message to submit a new image -->
+				<div class="row justify-content-center align-items-center my-5">
+					<div class="col-md-6 text-center col-sm-12 mx-auto">
+						{% if filename %}
+							<div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
+								<a href="/" class="btn btn-primary btn-lg px-4 gap-3">Submit a new image</a>
+							</div>
+							<p class="my-3">Click the button to submit a new image</p>
 						{% endif %}
-						{% endwith %}
-					</div>					
+					</div>
 				</div>
 			</div>
 		</main>      
