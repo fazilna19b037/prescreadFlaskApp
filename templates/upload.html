@@ -1,38 +1,60 @@
-
-
 <!doctype html>
-<title>Python Flask File Upload Example</title>
-<h2>Select a file to upload</h2>
-<p>
-	{% with messages = get_flashed_messages() %}
-	  {% if messages %}
-		
-		{% for message in messages %}
-		  <p>{{ message }}</p>
-		{% endfor %}
-		
-	  {% endif %}
-	{% endwith %}
-</p>
-{% if filename %}
-    <div>
-        <ul>
-          {% for content in output %}
-          <li>{{ content }}</li>
-          {% endfor %}
-        </ul>
-    </div>
-	<div>
-		<img width=400 height=400 src="{{ url_for('display_image', filename=filename) }}">
-	</div>
-{% endif %}
-<form method="post" action="/" enctype="multipart/form-data">
-    <dl>
-		<p>
-			<input type="file" name="file" autocomplete="off" required>
-		</p>
-    </dl>
-    <p>
-		<input type="submit" value="Submit">
-	</p>
-</form>
+<head>
+	<title>Prescread : Prescription Reader</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<html>
+	<body>
+		<main>
+			<!-- a bootstrap navbar titled "Welcome to Prescread" in the centre without navbar toggle button and other navitems -->
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class="container-fluid">
+					<a class="navbar-brand" href="#">Prescread</a>
+				</div>
+			</nav>
+			<!-- a bootstrap container with a form to upload a file and displays an image replacing the form after uploading -->
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 mx-auto text-center">
+						{% if filename %}
+							<img src="{{ url_for('display_image', filename=filename) }}" alt="Uploaded Image" width=400 height=400/>
+						{% else %}
+							<form method="post" action="/" enctype="multipart/form-data">
+								<div class="mb-3">
+									<label for="formFile" class="form-label">Upload a prescription</label>
+									<input class="form-control" type="file" id="formFile" name="file" autocomplete="off" required>
+								</div>
+								<div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
+									<button type="submit" value="submit" class="btn btn-primary btn-lg px-4 gap-3">Submit</button>
+								</div>
+							</form>
+						{% endif %}
+					</div>
+					<div class="col-md-6 mx-auto text-center">
+						<!--display contents in the output as a styled list-->
+						{% if filename %}
+							<ul class="list-group">
+								{% for item in output %}
+									<li class="list-group-item">{{ item }}</li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+
+						<!-- a bootstrap alert to display the flash messages -->
+						{% with messages = get_flashed_messages() %}
+						{% if messages %}
+						{% for message in messages %}
+						<div class="alert alert-success alert-dismissible fade show" role="alert">
+							{{ message }}
+							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+						{% endfor %}
+						{% endif %}
+						{% endwith %}
+					</div>					
+				</div>
+			</div>
+		</main>      
+   </body>
+</html>
