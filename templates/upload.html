@@ -66,6 +66,11 @@
 									<li class="list-group-item border-info">{{ item }}</li>
 								{% endfor %}
 							</ul>
+							<h1 style="font-size: 20px; text-align: center;">OCR Result</h1>
+							<ul class="list-group my-3">
+								{% for item in recognize_printed_results %}
+									<li class="list-group-item border-info">{{ item }}</li>
+								{% endfor %}
 						</div>
 					{% endif %}
 				</div>
