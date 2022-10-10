@@ -27,7 +27,7 @@
 				<div class="row align-items-center">
 					<div class="col-md-6 text-center col-12 mx-auto mt-3">
 						{% if filename %}
-							<img src="{{ url_for('display_image', filename=filename) }}" alt="Uploaded Image" width=400 height=400/>
+							<img src="{{ url_for('display_image', filename=filename) }}" alt="Uploaded Image" class="img-fluid">
 						{% else %}
 							<form method="post" action="/" enctype="multipart/form-data">
 								<div class="mb-3">
