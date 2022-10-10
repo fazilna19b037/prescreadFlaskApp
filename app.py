@@ -57,8 +57,7 @@ def upload_image():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         #print('upload_image filename: ' + filename)
         flash("Results processed successfully") 
-        #output,ocr_text=master("./static/uploads/"+filename)
-        output=master("./static/uploads/"+filename)
+        output, raw_text = master("./static/uploads/"+filename)
         return render_template('upload.html', filename=filename,output=output)
     else:
         flash('Allowed image types are -> png, jpg, jpeg, gif')
@@ -210,7 +209,7 @@ def master(remote_image_url):
     client = authenticate_client()
     output+=entity_recognition_example(client)
     output+=health_example(client)
-    return output
+    return output, raw_text
 
 
 if __name__ == "__main__":
