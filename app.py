@@ -58,7 +58,7 @@ def upload_image():
         #print('upload_image filename: ' + filename)
         flash("Results processed successfully") 
         output, raw_text = master("./static/uploads/"+filename)
-        return render_template('upload.html', filename=filename,output=output)
+        return render_template('upload.html', filename=filename, output=output, raw_text=raw_text)
     else:
         flash('Allowed image types are -> png, jpg, jpeg, gif')
         return redirect(request.url)
