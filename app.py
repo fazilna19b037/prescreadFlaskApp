@@ -137,11 +137,11 @@ def master(remote_image_url):
                         for y in raw_list:
                             if x==y:
                                 i=raw_list.index(x)
-                            if raw_list[i-1]=='Dr':
-                                j=False
-                        #print("Doctor Name is Dr.{}".format(entity.text))
-                            output.append("\nDoctor Name is Dr.{} \n".format(entity.text))
-                            final_text+="\nDoctor Name is Dr.{} \n".format(entity.text)
+                                if raw_list[i-1]=='Dr':
+                                    j=False
+                            #print("Doctor Name is Dr.{}".format(entity.text))
+                                    output.append("\nDoctor Name is Dr.{} \n".format(entity.text))
+                                    final_text+="\nDoctor Name is Dr.{} \n".format(entity.text)
                     if j:
                   #print("Name is {}".format(entity.text))
                         output.append("\nName is {} \n".format(entity.text))
@@ -209,6 +209,7 @@ def master(remote_image_url):
     client = authenticate_client()
     output+=entity_recognition_example(client)
     output+=health_example(client)
+    print(output)
     return output, raw_text
 
 

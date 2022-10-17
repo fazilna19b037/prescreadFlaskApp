@@ -115,6 +115,7 @@ def master(remote_image_url):
             #print("-----------------------")
             for entity in result.entities:
                 if entity.category=='Person':
+                    i=0
                     j=True
                     names=list(entity.text.split(" "))
                     raw_list=list(raw_text.split(" "))
@@ -194,6 +195,7 @@ def master(remote_image_url):
     client = authenticate_client()
     output+=entity_recognition_example(client)
     output+=health_example(client)
+    print(output)
     return output
 
 
